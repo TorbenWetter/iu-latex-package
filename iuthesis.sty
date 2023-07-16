@@ -1,0 +1,198 @@
+% Package identification.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{iuthesis}[2023/07/15 IU International University LaTeX Package]
+
+% Set the document language to German (e. g. dates).
+\RequirePackage[ngerman]{babel}
+
+% Set page size and margins.
+\RequirePackage[a4paper,top=2cm,left=2cm,bottom=2cm,right=2cm]{geometry}
+
+% Use the Arial font.
+\RequirePackage{fontspec}
+\setmainfont[
+  Path=/usr/share/fonts/truetype/msttcorefonts/,
+  UprightFont=*,
+  ItalicFont=*_Italic,
+  BoldFont=*_Bold,
+  BoldItalicFont=*_Bold_Italic,
+  Extension=.ttf
+]{Arial}
+
+% Set the line spacing ("1.5-zeilig" for 11pt text size).
+% See: https://www.overleaf.com/learn/latex/Articles/How_to_change_paragraph_spacing_in_LaTeX.
+\RequirePackage{setspace}
+\setstretch{1.399}
+
+% Set size and spacing of headings.
+\RequirePackage{titlesec}
+\titleformat*{\section}{\LARGE\bfseries}
+\titleformat*{\subsection}{\Large\bfseries}
+\titleformat*{\subsubsection}{\normalsize\bfseries}
+\titlespacing*{\section}{0pt}{6pt}{12pt}
+\titlespacing*{\subsection}{0pt}{12pt}{6pt}
+\titlespacing*{\subsubsection}{0pt}{12pt}{6pt}
+
+% Remove indentation from paragraphs, set spacing between paragraphs and import the xspace package.
+\RequirePackage{parskip}
+\setlength{\parskip}{6pt}
+\RequirePackage{xspace}
+
+% Configure quotations, graphics and bibliography.
+\RequirePackage{csquotes}
+\RequirePackage{graphicx}
+\RequirePackage[backend=biber,style=apa]{biblatex}
+
+% Allow the positioning of captions next to graphics.
+\RequirePackage[raggedleft]{sidecap}
+\sidecaptionvpos{figure}{t}
+
+% Enable prettier tables with automatic width and horizontal/vertical spacing.
+\RequirePackage{booktabs}
+\RequirePackage{tabularx}
+\setlength{\tabcolsep}{10pt} % default: 6pt
+\renewcommand{\arraystretch}{1.2} % default: 1
+
+% PDF options.
+\RequirePackage[
+  colorlinks=true,
+  linkcolor={black},
+  citecolor={black},
+  urlcolor={black},
+  linktocpage % link page number instead of title in table of contents
+]{hyperref}
+
+% Enable using key-value pairs as options.
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{
+  family=iupkg,
+  prefix=iupkg@
+}
+
+% Command to add the bibliography to the table of contents.
+\providecommand\phantomsection{}
+
+% Define abbreviations with correct blank space.
+\newcommand{\zB}{\mbox{z.\,B.}\xspace}
+\newcommand{\dash}{\mbox{d.\,h.}\xspace}
+\newcommand{\usw}{\mbox{usw.}\xspace}
+\newcommand{\etc}{\mbox{etc.}\xspace}
+\newcommand{\bzw}{\mbox{bzw.}\xspace}
+\newcommand{\ggf}{\mbox{ggf.}\xspace}
+\newcommand{\ua}{\mbox{u.\,a.}\xspace}
+\newcommand{\oAE}{\mbox{o.\,Ä.}\xspace}
+\newcommand{\etal}{\mbox{et~al.}\xspace}
+
+% Define options for the package.
+\DeclareStringOption{bibliographyfile}
+\DeclareStringOption{graphicsdir}
+\DeclareStringOption{logofile}
+\DeclareStringOption{art}
+\DeclareStringOption{hochschule}
+\DeclareStringOption{studiengang}
+\DeclareStringOption{titel}
+\DeclareStringOption{untertitel}
+\DeclareStringOption{autor}
+\DeclareStringOption{matrikelnummer}
+\DeclareStringOption{adresse}
+\DeclareStringOption{betreuer}
+\DeclareStringOption{abgabedatum}
+
+% Provide default values for the options.
+\def\iupkg@bibliographyfile{main.bib}
+\def\iupkg@graphicsdir{images/}
+\def\iupkg@logofile{logo}
+\def\iupkg@art{Bachelorarbeit}
+\def\iupkg@hochschule{Internationale Hochschule Duales Studium}
+\def\iupkg@studiengang{Informatik B.\,Sc.}
+\def\iupkg@titel{Titel der Arbeit}
+\def\iupkg@untertitel{Untertitel der Arbeit}
+\def\iupkg@autor{Vorname~Nachname}
+\def\iupkg@matrikelnummer{123456789}
+\def\iupkg@adresse{Straße~1\\12345~Stadt}
+\def\iupkg@betreuer{Betreuer: Dr.~Vorname~Nachname}
+\def\iupkg@abgabedatum{30.09.2023}
+
+% Process the options.
+\ProcessKeyvalOptions*
+
+% Load the bibliography file.
+\addbibresource{\iupkg@bibliographyfile}
+
+% Set the directory to load graphics from.
+\graphicspath{{\iupkg@graphicsdir}}
+
+% Define the cover page.
+\newcommand{\makecover}{
+  % Prevent the creation of anchors before the main content.
+  \hypersetup{pageanchor=false}
+
+  % Don't show the header, print the page number in the footer.
+  \thispagestyle{plain}
+
+  \begin{titlepage}
+
+    \begin{center}
+
+      \vspace*{.05\textheight}
+
+      \includegraphics[height=1.5cm]{\iupkg@logofile}
+
+      \vfill{}
+
+      \large{\iupkg@art}\\[1cm]
+      \large{\iupkg@hochschule}\\[0.25cm]
+      \large{Studiengang: \iupkg@studiengang}
+
+      \vfill{}
+
+      \Large{\textbf{\iupkg@titel}}\\[0.25cm]
+      \large{\iupkg@untertitel}
+
+      \vfill{}
+
+      \large{\iupkg@autor}\\[0.25cm]
+      \large{Matrikelnummer: \iupkg@matrikelnummer}\\[0.25cm]
+      \large{\iupkg@adresse}
+
+      \vfill{}
+
+      \large{\iupkg@betreuer}\\[0.25cm]
+      \large{Abgabedatum: \iupkg@abgabedatum}
+
+      \vspace*{.05\textheight}
+
+    \end{center}
+
+  \end{titlepage}
+
+  % Show roman numbers after the cover page (starting at 2).
+  \pagenumbering{Roman}
+  \setcounter{page}{2}
+}
+
+% Define the table of contents.
+\newcommand{\maketoc}{
+  % Print the table of contents and add a page break.
+  \tableofcontents
+  \clearpage
+
+  % Show arabic numbers for the main content.
+  \pagenumbering{arabic}
+
+  % Create anchors for all following sections.
+  \hypersetup{pageanchor=true}
+}
+
+% Define the bibliography.
+\newcommand{\makebibliography}{
+  % Add the bibliography to the table of contents.
+  \addcontentsline{toc}{section}{Literaturverzeichnis}
+
+  % Print the bibliography and add a page break.
+  \begingroup
+  \setlength{\emergencystretch}{1em}
+  \printbibliography[title=Literaturverzeichnis]
+  \endgroup
+  \clearpage
+}
