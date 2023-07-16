@@ -4,9 +4,32 @@ on:
   push:
     branches:
       - main
+    pull_request:
+      branches:
+        - main
 
 jobs:
+  changes:
+    name: Detect Changes
+    runs-on: ubuntu-latest
+
+    outputs:
+      package_file: ${{ steps.changes.outputs.package_file }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            package_file:
+              - iuthesis.sty
+          base: main
+
   release-latex-package:
+    needs: changes
+    if: needs.changes.outputs.package_file == 'true'
     runs-on: ubuntu-latest
     permissions:
       contents: write
