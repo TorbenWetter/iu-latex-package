@@ -53,6 +53,15 @@
 \setlength{\tabcolsep}{10pt} % default: 6pt
 \renewcommand{\arraystretch}{1.2} % default: 1
 
+% Allow the highlighting of source code.
+\RequirePackage[newfloat]{minted}
+\setminted{breaklines=true}
+\RequirePackage{caption}
+
+% Set up the code environment for source code listings.
+\newenvironment{code}{\captionsetup{type=listing}}{}
+\SetupFloatingEnvironment{listing}{name=Quellcode}
+
 % PDF options.
 \RequirePackage[
   colorlinks=true,
