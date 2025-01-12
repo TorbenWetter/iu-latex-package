@@ -50,6 +50,7 @@
 % Enable prettier tables with automatic width and horizontal/vertical spacing.
 \RequirePackage{booktabs}
 \RequirePackage{tabularx}
+\RequirePackage{longtable} % for tables spanning multiple pages
 \setlength{\tabcolsep}{10pt} % default: 6pt
 \renewcommand{\arraystretch}{1.2} % default: 1
 
@@ -96,31 +97,31 @@
 \DeclareStringOption{bibliographyfile}
 \DeclareStringOption{graphicsdir}
 \DeclareStringOption{logofile}
-\DeclareStringOption{art}
-\DeclareStringOption{hochschule}
-\DeclareStringOption{studiengang}
-\DeclareStringOption{titel}
-\DeclareStringOption{untertitel}
-\DeclareStringOption{autor}
-\DeclareStringOption{matrikelnummer}
-\DeclareStringOption{adresse}
-\DeclareStringOption{betreuer}
-\DeclareStringOption{abgabedatum}
+\DeclareStringOption{type}
+\DeclareStringOption{university}
+\DeclareStringOption{degree}
+\DeclareStringOption{title}
+\DeclareStringOption{subtitle}
+\DeclareStringOption{author}
+\DeclareStringOption{matriculationnumber}
+\DeclareStringOption{address}
+\DeclareStringOption{supervisor}
+\DeclareStringOption{submissiondate}
 
 % Provide default values for the options.
 \def\iupkg@bibliographyfile{main.bib}
 \def\iupkg@graphicsdir{images/}
-\def\iupkg@logofile{logo}
-\def\iupkg@art{Bachelorarbeit}
-\def\iupkg@hochschule{Internationale Hochschule Duales Studium}
-\def\iupkg@studiengang{Informatik B.\,Sc.}
-\def\iupkg@titel{Titel der Arbeit}
-\def\iupkg@untertitel{Untertitel der Arbeit}
-\def\iupkg@autor{Vorname~Nachname}
-\def\iupkg@matrikelnummer{123456789}
-\def\iupkg@adresse{Straße~1\\12345~Stadt}
-\def\iupkg@betreuer{Betreuer: Dr.~Vorname~Nachname}
-\def\iupkg@abgabedatum{30.09.2023}
+\def\iupkg@logofile{logo.png}
+\def\iupkg@type{Bachelorarbeit}
+\def\iupkg@university{Internationale Hochschule Duales Studium}
+\def\iupkg@degree{Informatik B.\,Sc.}
+\def\iupkg@title{Titel der Arbeit}
+\def\iupkg@subtitle{Untertitel der Arbeit}
+\def\iupkg@author{Vorname~Nachname}
+\def\iupkg@matriculationnumber{123456789}
+\def\iupkg@address{Straße~1\\12345~Stadt}
+\def\iupkg@supervisor{Prof.~Dr.~Vorname~Nachname}
+\def\iupkg@submissiondate{31.03.2025}
 
 % Process the options.
 \ProcessKeyvalOptions*
@@ -149,25 +150,25 @@
 
       \vfill{}
 
-      \large{\iupkg@art}\\[1cm]
-      \large{\iupkg@hochschule}\\[0.25cm]
-      \large{Studiengang: \iupkg@studiengang}
+      \large{\iupkg@type}\\[1cm]
+      \large{\iupkg@university}\\[0.25cm]
+      \large{Studiengang: \iupkg@degree}
 
       \vfill{}
 
-      \Large{\textbf{\iupkg@titel}}\\[0.25cm]
-      \large{\iupkg@untertitel}
+      \Large{\textbf{\iupkg@title}}\\[0.25cm]
+      \large{\iupkg@subtitle}
 
       \vfill{}
 
-      \large{\iupkg@autor}\\[0.25cm]
-      \large{Matrikelnummer: \iupkg@matrikelnummer}\\[0.25cm]
-      \large{\iupkg@adresse}
+      \large{\iupkg@author}\\[0.25cm]
+      \large{Matrikelnummer: \iupkg@matriculationnumber}\\[0.25cm]
+      \large{\iupkg@address}
 
       \vfill{}
 
-      \large{\iupkg@betreuer}\\[0.25cm]
-      \large{Abgabedatum: \iupkg@abgabedatum}
+      \large{Betreuende Person: \iupkg@supervisor}\\[0.25cm]
+      \large{Abgabedatum: \iupkg@submissiondate}
 
       \vspace*{.05\textheight}
 
