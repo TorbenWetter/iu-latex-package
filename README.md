@@ -145,3 +145,19 @@ This example demonstrates:
 - Proper placement of structural commands (`\makecover`, `\maketoc`, `\makebibliography`)
 - Appendix setup
 - Page breaks using `\clearpage`
+
+## Development Environment
+
+For an easy setup of a complete LaTeX development environment with this package pre-configured, you can use the [IU LaTeX Dev Container Template](https://github.com/TorbenWetter/iu-latex-container-templates). This template provides:
+
+- Pre-configured VS Code with LaTeX Workshop extension
+- Full TeXLive installation
+- This package pre-installed
+- Sample thesis structure
+- Automatic builds and previews
+
+To use it, you'll need VS Code with the Dev Containers extension installed. Then you can create a new repository using this template by referencing:
+
+```
+ghcr.io/torbenwetter/iu-latex-container-templates/thesis:latest
+```
