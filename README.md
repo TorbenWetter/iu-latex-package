@@ -14,10 +14,10 @@ A LaTeX Package for Writing Scientific Work at IU International University
 | degree              | Degree program              | Informatik B.\\,Sc.                      |
 | title               | Thesis title                | Titel der Arbeit                         |
 | subtitle            | Thesis subtitle             | Untertitel der Arbeit                    |
-| author              | Author name                 | Vorname~Nachname                         |
+| author              | Author name                 | Vorname\~Nachname                        |
 | matriculationnumber | Matriculation number        | 123456789                                |
-| address             | Author's address            | Straße~1\\\\12345~Stadt                  |
-| supervisor          | Supervisor name             | Prof.~Dr.~Vorname~Nachname               |
+| address             | Author's address            | Straße\~1\\\\12345\~Stadt                |
+| supervisor          | Supervisor name             | Prof.\~Dr.\~Vorname\~Nachname            |
 | submissiondate      | Submission date             | 31.03.2025                               |
 
 ## Abbreviation Commands
