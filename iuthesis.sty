@@ -56,9 +56,17 @@
 % Enable prettier tables with automatic width and horizontal/vertical spacing.
 \RequirePackage{booktabs}
 \RequirePackage{tabularx}
-\RequirePackage{longtable} % for tables spanning multiple pages
-\setlength{\tabcolsep}{10pt} % default: 6pt
+\setlength{\tabcolsep}{4pt} % default: 6pt
 \renewcommand{\arraystretch}{1.2} % default: 1
+
+% Ensure that longtable does not add extra horizontal offsets.
+\RequirePackage{longtable} % for tables spanning multiple pages
+\setlength\LTleft{0pt}
+\setlength\LTright{0pt}
+
+% Define new column types for automatic line breaking.
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1\textwidth}}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
 
 % Allow the highlighting of source code.
 \RequirePackage[newfloat]{minted}
