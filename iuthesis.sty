@@ -68,6 +68,69 @@
 \newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1\textwidth}}
 \newcolumntype{Y}{>{\raggedright\arraybackslash}X}
 
+%==============================
+%   Mini-TOC for Appendices
+%==============================
+\makeatletter
+
+% 1) Associate "section", "subsection", and "subsubsection" with .anx.
+\@namedef{l@section.anx}{\l@section}
+\@namedef{l@subsection.anx}{\l@subsection}
+\@namedef{l@subsubsection.anx}{\l@subsubsection}
+
+% 2) Define the heading text for the mini-TOC.
+\newcommand{\appendixheading}{Anhangsverzeichnis}
+
+% 3) Provide a command to add that heading to the *main* TOC:
+\newcommand{\printappendixheadingintoc}{%
+  \clearpage
+  \phantomsection
+  \addcontentsline{toc}{section}{\appendixheading}%
+}
+
+% 4) Provide a command to typeset the mini-TOC (reads .anx):
+\newcommand{\listappendix}{%
+  \clearpage
+  \phantomsection
+  \section*{\appendixheading}%
+  \@starttoc{anx}%
+}
+
+% 5) Custom macros for creating headings in the appendices,
+%    writing them only to .anx, no main TOC:
+
+% Appendix "section" level.
+\newcommand{\AppendixSection}[1]{%
+  \refstepcounter{section}%
+  \phantomsection
+  \addcontentsline{anx}{section}{\protect\numberline{\thesection}#1}%
+  \noindent
+  {\huge\bfseries \thesection\quad #1}\par
+  \vspace{1em}%
+}
+
+% Appendix "subsection" level.
+\newcommand{\AppendixSubsection}[1]{%
+  \refstepcounter{subsection}%
+  \phantomsection
+  \addcontentsline{anx}{subsection}{\protect\numberline{\thesubsection}#1}%
+  \noindent
+  {\large\bfseries \thesubsection\quad #1}\par
+  \vspace{0.75em}%
+}
+
+% Appendix "subsubsection" level.
+\newcommand{\AppendixSubsubsection}[1]{%
+  \refstepcounter{subsubsection}%
+  \phantomsection
+  \addcontentsline{anx}{subsubsection}{\protect\numberline{\thesubsubsection}#1}%
+  \noindent
+  {\normalsize\bfseries \thesubsubsection\quad #1}\par
+  \vspace{0.5em}%
+}
+
+\makeatother
+
 % Allow the highlighting of source code.
 \RequirePackage[newfloat]{minted}
 \setminted{breaklines=true}
